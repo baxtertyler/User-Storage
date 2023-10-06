@@ -51,7 +51,12 @@ const deleteUser = (id) => {
     users['users_list'].splice(index, 1);
 }
 
+const generateID = () => {
+    return Math.floor(Math.random() * 999999999).toString();
+}
+
 const addUser = (user) => {
+    user["id"] = generateID();
     users['users_list'].push(user);
     return user;
 }
@@ -94,13 +99,18 @@ app.get('/', (req, res) => {
 
 app.post('/users', (req, res) => {
     const userToAdd = req.body;
-    addUser(userToAdd);
-    res.send();
+    let result = addUser(userToAdd);
+    if (result == undefined) {
+        res.send("Could not add user");
+    } else {
+        res.status(201).send(result);
+    }
+    //return result;
 });
 
-app.delete('/users', (req, res) => {
-    const userToRemove = req.body.id;
-    deleteUser(userToRemove);
+app.delete('/users/:id', (req, res) => {
+    const id = req.params['id'];
+    deleteUser(id);
     res.send();
 });
 
