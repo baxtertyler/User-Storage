@@ -49,6 +49,7 @@ const findUserByNameAndJob = (name, job) => {
 const deleteUser = (id) => {
     const index = users['users_list'].findIndex((user) => user['id'] === id);
     users['users_list'].splice(index, 1);
+    return index;
 }
 
 const generateID = () => {
@@ -105,12 +106,16 @@ app.post('/users', (req, res) => {
     } else {
         res.status(201).send(result);
     }
-    //return result;
 });
 
 app.delete('/users/:id', (req, res) => {
     const id = req.params['id'];
-    deleteUser(id);
+    let result = deleteUser(id);
+    if (result == undefined) {
+        res.status(404).send("Resource not found");
+    } else {
+        res.status(203);
+    }
     res.send();
 });
 
