@@ -37,8 +37,8 @@ function MyApp() {
 		return promise;
 	}
 
-	function removeUser(person) {
-		let id = person.id;
+	function removeUser(index) {
+		let id = characters.at(index).id;
 		const promise = fetch(`http://localhost:8000/users/${id}`, { method: "DELETE" });
 		return promise;
 	}
