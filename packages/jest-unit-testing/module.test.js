@@ -34,3 +34,39 @@ test('Testing dev -- negative', () => {
     expect(got).toBe(expected);
 });
 
+// contains numbers test
+
+test('Testing containsNumbers -- success', () => {
+    const got = mut.containsNumbers("11011");
+    expect(got).toBeTruthy();
+})
+
+test('Testing containsNumbers -- no num', () => {
+    const got = mut.containsNumbers("ffff");
+    expect(got).toBeFalsy();
+})
+
+test('Testing containsNumbers -- =1 letter, >1 number', () => {
+    const got = mut.containsNumbers("0000F0000");
+    expect(got).toBeTruthy();
+})
+
+test('Testing containsNumbers -- >1 letter, >1 number', () => {
+    const got = mut.containsNumbers("9g9g9g");
+    expect(got).toBeTruthy();
+})
+
+test('Testing containsNumbers -- >1 letter, =1 number', () => {
+    const got = mut.containsNumbers("6ooooo");
+    expect(got).toBeTruthy();
+})
+
+test('Testing containsNumbers -- start with letter', () => {
+    const got = mut.containsNumbers("oo7");
+    expect(got).toBeTruthy();
+})
+
+test('Testing containsNumbers -- space no number', () => {
+    const got = mut.containsNumbers("ff ff");
+    expect(got).toBeFalsy();
+})
