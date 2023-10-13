@@ -20,15 +20,17 @@ test('test --- num unique ticker symbols', () => {
     expect(expected).toEqual(num_symbols);
 })
 
-test('test ---  make a purchase and delete it', () => {
-    const symbol = 'XYZ';
-    const num_shares = 10;
-    
-    expect(portfolio.purchase(symbol, num_shares)).toBeTruthy();
+test('test ---  make a purchase, check num stocks, delete it', () => {
+    const stock = { symbol: 'XYZ', number: 10, };
+
+    expect(portfolio.purchase(stock)).toBeTruthy();
     expect(portfolio.is_empty()).toBeFalsy();
     expect(portfolio.num_symbols()).toBe(1);
 
-    expect(portfolio.sale(symbol, num_shares)).toBeTruthy();
+    expect(portfolio.num_of_stock('XYZ')).toBe(10);
+
+    expect(portfolio.sale(stock)).toBeTruthy();
     expect(portfolio.is_empty()).toBeTruthy();
     expect(portfolio.num_symbols()).toBe(0);
 });
+

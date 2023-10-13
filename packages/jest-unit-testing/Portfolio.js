@@ -1,6 +1,6 @@
 class Portfolio {
     constructor() {
-        this.symbols = new Array();
+        this.symbols = [];
         this.num_shares = 0;
     }
 
@@ -12,20 +12,29 @@ class Portfolio {
         return this.symbols.length;
     }
 
-    purchase(sym, num) {
-        this.symbols.push(sym);
-        this.num_shares += num;
+    purchase(stock) {
+        this.symbols.push(stock);
+        this.num_shares += stock.number;
         return true;
     }
 
-    sale(sym, num) {
-        let i = this.symbols.indexOf(sym);
-        if (i == -1) {
-            return false;
+    sale(stock) {
+        let i = this.symbols.findIndex((element) => element.symbol == stock.symbol);
+        if (i == -1) { 
+            return false; 
         }
         this.symbols.splice(i, 1);
-        this.num_shares -= num;
+        this.num_shares -= stock.number;
         return true;
+    }
+
+    num_of_stock(sym) {
+        let i = this.symbols.findIndex((element) => element.symbol == sym);
+        if (i == -1) { 
+            return false; 
+        } else {
+            return this.symbols[i].number;
+        }
     }
 }
 
