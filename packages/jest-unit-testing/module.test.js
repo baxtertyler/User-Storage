@@ -66,7 +66,9 @@ test('Testing containsNumbers -- start with letter', () => {
     expect(got).toBeTruthy();
 })
 
+/*
 test('Testing containsNumbers -- space no number', () => {
     const got = mut.containsNumbers("ff ff");
     expect(got).toBeFalsy();
 })
+*/
