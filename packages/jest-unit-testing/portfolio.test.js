@@ -43,3 +43,12 @@ test('test --- only owned symbols', () => {
     expect(portfolio.purchase(stock2)).toBeFalsy();
 });
 
+test('test --- exception', () => {
+    const stock1 = { symbol: 'XYZ', number: 10, };
+    const stock2 = { symbol: 'XYZ', number: 11, };
+    expect(portfolio.purchase(stock1)).toBeTruthy();
+    expect(() => {
+        portfolio.sale(stock2);
+    }).toThrow('ShareSaleException');
+});
+

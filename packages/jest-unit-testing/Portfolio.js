@@ -26,12 +26,15 @@ class Portfolio {
         if (i == -1) { 
             return false; 
         }
+        if (this.symbols[i].number < stock.number) {
+            throw new Error('ShareSaleException');
+        }
         this.symbols[i].number -= stock.number;
-        if (this.symbols[i].number <= 0) {
+        if (this.symbols[i].number == 0) {
             this.symbols.splice(i, 1);
         }
         this.num_shares -= stock.number;
-        if (this.num_shares <= 0) {
+        if (this.num_shares == 0) {
             this.num_shares = 0;
             this.symbols = [];
         }
