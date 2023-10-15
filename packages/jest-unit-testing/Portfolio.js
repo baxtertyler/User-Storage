@@ -5,7 +5,7 @@ class Portfolio {
     }
 
     is_empty() {
-        return this.num_shares === 0;
+        return this.symbols.length == 0;
     }
 
     num_symbols() {
@@ -26,11 +26,14 @@ class Portfolio {
         if (i == -1) { 
             return false; 
         }
-        this.num_shares -= this.symbols[i].number;
-        if (this.symbols[i].number < stock.number) {
+        this.symbols[i].number -= stock.number;
+        if (this.symbols[i].number <= 0) {
             this.symbols.splice(i, 1);
-        } else {
-            this.symbols[i].number -= stock.number;
+        }
+        this.num_shares -= stock.number;
+        if (this.num_shares <= 0) {
+            this.num_shares = 0;
+            this.symbols = [];
         }
         return true;
     }

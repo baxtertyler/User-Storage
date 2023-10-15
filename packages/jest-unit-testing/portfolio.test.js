@@ -22,6 +22,7 @@ test('test --- num unique ticker symbols', () => {
 
 test('test ---  make a purchase, check num stocks, delete it', () => {
     const stock = { symbol: 'XYZ', number: 10, };
+    expect(portfolio.num_symbols()).toBe(0);
 
     expect(portfolio.purchase(stock)).toBeTruthy();
     expect(portfolio.is_empty()).toBeFalsy();
