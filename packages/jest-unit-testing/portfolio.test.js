@@ -34,3 +34,11 @@ test('test ---  make a purchase, check num stocks, delete it', () => {
     expect(portfolio.num_symbols()).toBe(0);
 });
 
+test('test --- only owned symbols', () => {
+    const stock1 = { symbol: 'XYZ', number: 10, };
+    const stock2 = { symbol: 'ABC', number: 0, };
+
+    expect(portfolio.purchase(stock1)).toBeTruthy();
+    expect(portfolio.purchase(stock2)).toBeFalsy();
+});
+

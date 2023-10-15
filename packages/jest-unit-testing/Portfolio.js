@@ -13,6 +13,9 @@ class Portfolio {
     }
 
     purchase(stock) {
+        if (stock.number < 1) {
+            return false;
+        }
         this.symbols.push(stock);
         this.num_shares += stock.number;
         return true;
@@ -23,8 +26,12 @@ class Portfolio {
         if (i == -1) { 
             return false; 
         }
-        this.symbols.splice(i, 1);
-        this.num_shares -= stock.number;
+        this.num_shares -= this.symbols[i].number;
+        if (this.symbols[i].number < stock.number) {
+            this.symbols.splice(i, 1);
+        } else {
+            this.symbols[i].number -= stock.number;
+        }
         return true;
     }
 
