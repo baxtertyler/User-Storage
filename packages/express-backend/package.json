@@ -12,6 +12,7 @@
   "type": "module",
   "description": "",
   "dependencies": {
-    "cors": "^2.8.5"
+    "cors": "^2.8.5",
+    "mongoose": "^7.6.3"
   }
 }
