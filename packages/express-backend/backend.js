@@ -5,20 +5,24 @@ import userService from "./user-services.js";
 const app = express();
 const port = 8000;
 
-const findUserByName = (name) => { 
-    return userService.findUserByName(name);
-}
-
 const findUserById = (id) => {
     return userService.findUserById(id);
 }
 
-const findUserByNameAndJob = (name, job) => {
-    return users['users_list'].filter((user)=>user['name'] === name).filter((user)=>user['job'] === job);
+const findUserByName = (name) => { 
+    return userService.findUserByName(name);
 }
 
-function findUserByJob(job) {
+const findUserByJob = (job) => {
     return userService.findUserByJob(job);
+}
+
+const findUserByNameAndJob = (name, job) => {
+    return userService.findUserByNameAndJob(name, job);
+}
+
+const getUsers = () => {
+    return userService.getUsers();
 }
 
 /*const deleteUser = (id) => {
@@ -81,7 +85,7 @@ app.get('/users', (req, res) => {
                 res.status(404).json({error: 'User not found'});
             });
     } else {
-        userService.getUsers()
+        getUsers()
             .then((users) => {
                 res.status(200).json({users_list:users});
             })

@@ -40,10 +40,15 @@ function findUserByJob(job) {
   return userModel.find({ job: job });
 }
 
+function findUserByNameAndJob(name, job) {
+  return userModel.find({name:name}, {job:job});
+}
+
 export default {
   addUser,
   getUsers,
   findUserById,
   findUserByName,
   findUserByJob,
+  findUserByNameAndJob,
 };
