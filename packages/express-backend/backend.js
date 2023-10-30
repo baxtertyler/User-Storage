@@ -25,11 +25,9 @@ const getUsers = () => {
     return userService.getUsers();
 }
 
-/*const deleteUser = (id) => {
-    const index = users['users_list'].findIndex((user) => user['id'] === id);
-    users['users_list'].splice(index, 1);
-    return index;
-}*/
+const deleteUser = (id) => {
+    return userService.deleteUser(id);
+}
 
 const generateID = () => {
     return Math.floor(Math.random() * 999999999).toString();
@@ -104,18 +102,18 @@ app.post('/users', (req, res) => {
         .catch(() => {
             res.status(404).json({error: 'User could not be added'});
         });
-});
+}); 
 
-/*app.delete('/users/:id', (req, res) => {
-    const id = req.params['_id'];
-    let result = deleteUser(id);
-    if (result == undefined) {
-        res.status(404).send("Resource not found");
-    } else {
-        res.status(203);
-    }
-    res.send();
-});*/
+app.delete('/users/:id', (req, res) => {
+    const id = req.params.id;
+    deleteUser(id)
+        .then(() => {
+            res.status(203);
+        })
+        .catch(() => {
+            res.status(404).json({error: 'User not found'});
+        })
+});
 
 app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`);
